@@ -6,8 +6,8 @@ def get_info_about_trending_repositories(mon_date):
     parameters = {'q': 'created:>={}'.format(mon_date), 'sort': 'stars'}
     repos = requests.get("https://api.github.com/search/repositories", params=parameters)
     repos = repos.json()['items']
-    info = [(repo['name'], repo['html_url'], repo['open_issues']) for repo in repos]
-    return info
+    repos_info = [(repo['name'], repo['html_url'], repo['open_issues']) for repo in repos]
+    return repos_info
 
 
 def get_closest_monday():
