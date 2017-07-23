@@ -3,9 +3,12 @@ import datetime
 
 
 def get_info_about_trending_repositories(mon_date):
-    repos = requests.get("https://api.github.com/search/repositories?q=created:>={}&sort=stars".format(mon_date))
+    parameters = {'q': 'created:>={}'.format(mon_date), 'sort': 'stars'}
+    repos = requests.get("https://api.github.com/search/repositories", params=parameters)
     repos = repos.json()['items']
-    return ["{} {} {}".format(repo['name'], repo['html_url'], str(repo['open_issues'])) for repo in repos]
+    info = [(repo['name'], repo['html_url'], repo['open_issues']) for repo in repos]
+    return info
+
 
 def get_closest_monday():
     today = datetime.date.today()
@@ -14,7 +17,8 @@ def get_closest_monday():
     return mon_date
 
 if __name__ == '__main__':
+    repo_quantity = 20
     mon_date = get_closest_monday()
-    links = get_info_about_trending_repositories(mon_date)
-    print(*links[:20], sep="\n")
+    info = get_info_about_trending_repositories(mon_date)[:repo_quantity]
+    print("\n".join("{} | {} | {}".format(repo[0], repo[1], repo[2]) for repo in info))
 
