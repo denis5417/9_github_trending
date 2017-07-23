@@ -20,6 +20,6 @@ def get_closest_monday():
 if __name__ == '__main__':
     repo_quantity = 20
     mon_date = get_closest_monday()
-    info = get_info_about_trending_repositories(mon_date)[:repo_quantity]
-    print("\n".join("{} | {} | {}".format(repo[0], repo[1], repo[2]) for repo in info))
+    repos_info = get_info_about_trending_repositories(mon_date)[:repo_quantity]
+    print("\n".join("{} | {} | {}".format(repo[0], repo[1], repo[2]) for repo in repos_info))
 
