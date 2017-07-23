@@ -11,8 +11,9 @@ def get_info_about_trending_repositories(mon_date):
 
 
 def get_closest_monday():
+    monday_id = 1
     today = datetime.date.today()
-    delta = datetime.timedelta(today.isoweekday() - 1)
+    delta = datetime.timedelta(today.isoweekday() - monday_id)
     mon_date = today - delta
     return mon_date
 
