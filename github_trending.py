@@ -22,4 +22,3 @@ if __name__ == '__main__':
     mon_date = get_closest_monday()
     repos_info = get_info_about_trending_repositories(mon_date)[:repo_quantity]
     print("\n".join("{} | {} | {}".format(repo[0], repo[1], repo[2]) for repo in repos_info))
-
